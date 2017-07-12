@@ -46,36 +46,16 @@ def make_chains(text_string):
     for count in range(len(words)-2): 
         key = (words[count], words[count + 1])
         value = words[count + 2]
-        #hardcoding  the last two items of the list do we are not out of range in out for loop 
-        chains[( words[-2], words[-1] )] = [None]
+        
+        
         if key in chains:
             chains[key].append(value)
         else:
             chains[key]=[value]
 
-    print chains
-
-
-
-
-        # for i in words
-        #     if key[0] = words[i] and Key[1] == words [i+1]
-        #         chain_list.append(words [i+2])
-
-
-
-
-        # value = words [count+2]
-        # print key
-
-       
-
-
-    # for word in range(len(text_string)):
-    #     print text_string[word] + text_string[word + 1]
-    #     #for word in range(len(text_string): 
-
-
+    #hardcoding  the last two items of the list do we are not out of range in out for loop 
+    chains[( words[-2], words[-1] )] = [None]
+   
 
 
         
@@ -89,8 +69,23 @@ def make_text(chains):
     """Return text from chains."""
 
     words = []
+    
+    current_key = choice(chains.keys()) #this finds a random key, our tuple in our our chains dictionary 
+   # print starting_key[0], starting_key[1] # this finds a tuple in that random key that we chose 
+    chosen_word = choice(chains[current_key])
 
-    # your code goes here
+    words.extend(current_key)
+   
+    while chosen_word is not None:
+        words.append(chosen_word)
+        current_key = (words[-2],words[-1])
+        chosen_word = choice(chains[current_key])
+        #words.extend(current_key)
+       
+
+ 
+
+
 
     return " ".join(words)
 
